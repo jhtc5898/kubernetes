@@ -1,0 +1,44 @@
+version: "2.1"
+
+services:
+  dockerdb:
+    image: mysql:latest
+    container_name: dockerdb
+    hostname: dockerdb
+    environment:
+      - MYSQL_DATABASE=SistemsDistribuidos
+      - MYSQL_USER=john
+      - MYSQL_PASSWORD=john0105598254
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=john --password=john0105598254 --execute \"SHOW DATABASES;\""
+    networks:
+      - puente
+
+  dockerjava:
+    image: dockerjava
+    depends_on:
+      dockerdb:
+       condition: service_healthy
+    container_name: dockerjava
+    hostname: dockerjava
+    ports:
+      - 8080:8080 
+      - 9990:9990 
+    networks:
+      - puente
+
+  dockerangular:
+    image: dockerangular 
+    container_name: dockerangular
+    hostname: dockerangular
+    ports:
+     - 9090:4200
+    networks:
+     - puente
+
+networks:
+    puente:
+        driver: bridge

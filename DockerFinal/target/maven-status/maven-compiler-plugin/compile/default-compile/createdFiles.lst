@@ -1,0 +1,9 @@
+web/CorsFilter.class
+web/JAXRSActivator.class
+gestion/GestionUsuarioLocal.class
+util/Resource.class
+servicio/UsuarioRS.class
+gestion/GestionUsuario.class
+modelo/Usuario_.class
+modelo/Usuario.class
+dao/UsuarioDAO.class
